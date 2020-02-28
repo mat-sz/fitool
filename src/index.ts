@@ -131,7 +131,8 @@ export const toString = async (file: FileType): Promise<string> => {
  * @param name 
  */
 export const download = async (file: FileType, name: string): Promise<void> => {
-    const url = await toDataURL(file);
+    let url = (typeof file === 'string' && file.startsWith('blob:')) ? file : await toDataURL(file);
+
     const element = document.createElement('a');
     element.setAttribute('href', url);
     element.setAttribute('download', name);
