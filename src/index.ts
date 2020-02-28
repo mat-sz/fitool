@@ -23,6 +23,9 @@ export const toBlob = async (file: FileType, type?: string): Promise<Blob> => {
         return new Blob([ file ], {
             type: type || file.type
         });
+    } else if (typeof file === 'string' && file.startsWith('blob:')) {
+        const res = await fetch(file);
+        return await res.blob();
     }
     
     const buffer = await toArrayBuffer(file);
@@ -35,6 +38,10 @@ export const toDataURL = async (file: FileType): Promise<string> => {
     if (typeof file === 'string') {
         if (validateDataURL(file)) {
             return file;
+        } else if (file.startsWith('blob:')) {
+            const res = await fetch(file);
+            const blob = await res.blob();
+            return await fileToDataURL(blob);
         } else {
             return 'data:text/plain;charset=UTF-8,' + file;
         }
@@ -56,6 +63,9 @@ export const toArrayBuffer = async (file: FileType): Promise<ArrayBuffer> => {
         if (validateDataURL(file)) {
             const parsed = parseDataURL(file);
             return parsed.data;
+        } else if (file.startsWith('blob:')) {
+            const res = await fetch(file);
+            return await res.arrayBuffer();
         } else {
             return encodeString(file);
         }
@@ -69,6 +79,9 @@ export const toString = async (file: FileType): Promise<string> => {
         if (validateDataURL(file)) {
             const parsed = parseDataURL(file);
             return decodeString(parsed.data);
+        } else if (file.startsWith('blob:')) {
+            const res = await fetch(file);
+            return await res.text();
         } else {
             return file;
         }
