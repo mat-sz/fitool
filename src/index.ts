@@ -5,6 +5,12 @@ import { parseDataURL, validateDataURL, encodeString, decodeString } from './dat
 
 export type FileType = File | Blob | string | ArrayBuffer;
 
+/**
+ * Converts a given `File`, `Blob`, `ArrayBuffer`, data URL, blob URL or string to a `File`.
+ * @param file 
+ * @param name 
+ * @param type Mimetype.
+ */
 export const toFile = async (file: FileType, name?: string, type?: string): Promise<File> => {
     if (file instanceof File) {
         return new File([ file ], name || file.name, {
@@ -18,6 +24,11 @@ export const toFile = async (file: FileType, name?: string, type?: string): Prom
     });
 };
 
+/**
+ * Converts a given `File`, `Blob`, `ArrayBuffer`, data URL, blob URL or string to a `Blob`.
+ * @param file 
+ * @param type 
+ */
 export const toBlob = async (file: FileType, type?: string): Promise<Blob> => {
     if (file instanceof Blob) {
         return new Blob([ file ], {
@@ -34,6 +45,10 @@ export const toBlob = async (file: FileType, type?: string): Promise<Blob> => {
     });
 };
 
+/**
+ * Converts a given `File`, `Blob`, `ArrayBuffer`, data URL, blob URL or string to a data URL.
+ * @param file 
+ */
 export const toDataURL = async (file: FileType): Promise<string> => {
     if (typeof file === 'string') {
         if (validateDataURL(file)) {
@@ -54,6 +69,19 @@ export const toDataURL = async (file: FileType): Promise<string> => {
     throw new Error('Unsupported file type.');
 };
 
+/**
+ * Converts a given `File`, `Blob`, `ArrayBuffer`, data URL, blob URL or string to a blob URL.
+ * @param file 
+ */
+export const toBlobURL = async (file: FileType): Promise<string> => {
+    const blob = await toBlob(file);
+    return URL.createObjectURL(blob);
+};
+
+/**
+ * Converts a given `File`, `Blob`, `ArrayBuffer`, data URL, blob URL or string to an `ArrayBuffer`.
+ * @param file 
+ */
 export const toArrayBuffer = async (file: FileType): Promise<ArrayBuffer> => {
     if (file instanceof ArrayBuffer) {
         return file;
@@ -74,6 +102,10 @@ export const toArrayBuffer = async (file: FileType): Promise<ArrayBuffer> => {
     throw new Error('Unsupported file type.');
 };
 
+/**
+ * Converts a given `File`, `Blob`, `ArrayBuffer`, data URL, blob URL or string to an UTF-8 string.
+ * @param file 
+ */
 export const toString = async (file: FileType): Promise<string> => {
     if (typeof file === 'string') {
         if (validateDataURL(file)) {
@@ -93,6 +125,11 @@ export const toString = async (file: FileType): Promise<string> => {
     return decodeString(buffer);
 };
 
+/**
+ * Initiates a download for a given `File`, `Blob`, `ArrayBuffer`, data URL, blob URL or string.
+ * @param file 
+ * @param name 
+ */
 export const download = async (file: FileType, name: string): Promise<void> => {
     const url = await toDataURL(file);
     const element = document.createElement('a');

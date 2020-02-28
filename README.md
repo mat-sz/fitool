@@ -46,24 +46,28 @@ async function example() {
 
 ### toFile(file: File | Blob | string | ArrayBuffer, name?: string): Promise\<File\>
 
-Converts a given `File`, `Blob`, `ArrayBuffer`, data URL or string to a `File`.
+Converts a given `File`, `Blob`, `ArrayBuffer`, data URL, blob URL or string to a `File`.
 
 ### toBlob(file: File | Blob | string | ArrayBuffer): Promise\<Blob\>
 
-Converts a given `File`, `Blob`, `ArrayBuffer`, data URL or string to a `Blob`.
+Converts a given `File`, `Blob`, `ArrayBuffer`, data URL, blob URL or string to a `Blob`.
 
 ### toDataURL(file: File | Blob | string | ArrayBuffer): Promise\<string\>
 
-Converts a given `File`, `Blob`, `ArrayBuffer`, data URL or string to a data URL.
+Converts a given `File`, `Blob`, `ArrayBuffer`, data URL, blob URL or string to a data URL.
+
+### toBlobURL(file: File | Blob | string | ArrayBuffer): Promise\<string\>
+
+Converts a given `File`, `Blob`, `ArrayBuffer`, data URL, blob URL or string to a blob URL.
 
 ### toArrayBuffer(file: File | Blob | string | ArrayBuffer): Promise\<ArrayBuffer\>
 
-Converts a given `File`, `Blob`, `ArrayBuffer`, data URL or string to an `ArrayBuffer`.
+Converts a given `File`, `Blob`, `ArrayBuffer`, data URL, blob URL or string to an `ArrayBuffer`.
 
 ### toString(file: File | Blob | string | ArrayBuffer): Promise\<string\>
 
-Converts a given `File`, `Blob`, `ArrayBuffer`, data URL or string to an UTF-8 string.
+Converts a given `File`, `Blob`, `ArrayBuffer`, data URL, blob URL or string to an UTF-8 string.
 
 ### download(file: File | Blob | string | ArrayBuffer, name: string): Promise\<void\>
 
-Initiates a download for a given `File`, `Blob`, `ArrayBuffer`, data URL or string.
+Initiates a download for a given `File`, `Blob`, `ArrayBuffer`, data URL, blob URL or string.
