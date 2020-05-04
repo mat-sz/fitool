@@ -1,10 +1,6 @@
 import { fromByteArray } from 'base64-js';
 
-import {
-  fileToArrayBuffer,
-  fileToDataURL,
-  fileToString,
-} from './fileReaderFunctions';
+import { fileToDataURL } from './fileReaderFunctions';
 import {
   parseDataURL,
   validateDataURL,
@@ -102,7 +98,7 @@ export const toArrayBuffer = async (file: FileType): Promise<ArrayBuffer> => {
   if (file instanceof ArrayBuffer) {
     return file;
   } else if (file instanceof Blob) {
-    return await fileToArrayBuffer(file);
+    return await file.arrayBuffer();
   } else if (typeof file === 'string') {
     if (validateDataURL(file)) {
       const parsed = parseDataURL(file);
@@ -134,7 +130,7 @@ export const toString = async (file: FileType): Promise<string> => {
       return file;
     }
   } else if (file instanceof Blob) {
-    return await fileToString(file);
+    return await file.text();
   }
 
   const buffer = await toArrayBuffer(file);
