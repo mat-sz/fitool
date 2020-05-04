@@ -98,7 +98,7 @@ export const toArrayBuffer = async (file: FileType): Promise<ArrayBuffer> => {
   if (file instanceof ArrayBuffer) {
     return file;
   } else if (file instanceof Blob) {
-    return await file.arrayBuffer();
+    return await new Response(file).arrayBuffer();
   } else if (typeof file === 'string') {
     if (validateDataURL(file)) {
       const parsed = parseDataURL(file);
@@ -130,7 +130,7 @@ export const toString = async (file: FileType): Promise<string> => {
       return file;
     }
   } else if (file instanceof Blob) {
-    return await file.text();
+    return await new Response(file).text();
   }
 
   const buffer = await toArrayBuffer(file);
