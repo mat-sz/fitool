@@ -27,8 +27,8 @@ yarn add fitool
 import { download } from 'fitool';
 
 async function example() {
-    const result = await toString('data:text/plain,abc');
-    // result = abc
+  const result = await toString('data:text/plain,abc');
+  // result = abc
 }
 ```
 
@@ -38,7 +38,7 @@ async function example() {
 import { download } from 'fitool';
 
 async function example() {
-    await download('data:image/png;base64,...');
+  await download('data:image/png;base64,...');
 }
 ```
 
