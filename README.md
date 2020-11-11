@@ -5,6 +5,14 @@ TypeScript file functions library.
 </p>
 
 <p align="center">
+<a href="https://npmjs.com/package/fitool">
+<img alt="npm" src="https://img.shields.io/npm/v/fitool">
+<img alt="npm" src="https://img.shields.io/npm/dw/fitool">
+<img alt="NPM" src="https://img.shields.io/npm/l/fitool">
+</a>
+</p>
+
+<p align="center">
 <strong>Quickstart:</strong>
 </p>
 
