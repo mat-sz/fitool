@@ -5,6 +5,7 @@ TypeScript file functions library.
 </p>
 
 <p align="center">
+<img alt="workflow" src="https://img.shields.io/github/workflow/status/mat-sz/fitool/Node.js%20CI%20(yarn)">
 <a href="https://npmjs.com/package/fitool">
 <img alt="npm" src="https://img.shields.io/npm/v/fitool">
 <img alt="npm" src="https://img.shields.io/npm/dw/fitool">
