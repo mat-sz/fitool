@@ -146,7 +146,7 @@ export const download = async (file: FileType, name: string): Promise<void> => {
   let url =
     typeof file === 'string' && file.startsWith('blob:')
       ? file
-      : await toDataURL(file);
+      : await toBlobURL(file);
 
   const element = document.createElement('a');
   element.setAttribute('href', url);
