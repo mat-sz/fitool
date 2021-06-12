@@ -67,14 +67,14 @@ export const toDataURL = async (file: FileType): Promise<string> => {
       const blob = await res.blob();
       return await fileToDataURL(blob);
     } else {
-      return 'data:text/plain;charset=UTF-8,' + file;
+      return 'data:text/plain;charset=UTF-8,' + encodeURIComponent(file);
     }
   } else if (file instanceof Blob) {
     return await fileToDataURL(file);
   } else if (file instanceof ArrayBuffer) {
     return (
       'data:application/octet-stream;base64,' +
-      fromByteArray(new Uint8Array(file))
+      encodeURIComponent(fromByteArray(new Uint8Array(file)))
     );
   }
 
