@@ -29,7 +29,7 @@ export const toFile = async (
 
   const blob = await toBlob(file);
   return new File([blob], name || '', {
-    type,
+    type: type || blob.type,
   });
 };
 
@@ -43,7 +43,10 @@ export const toBlob = async (file: FileType, type?: string): Promise<Blob> => {
     return new Blob([file], {
       type: type || file.type,
     });
-  } else if (typeof file === 'string' && file.startsWith('blob:')) {
+  } else if (
+    typeof file === 'string' &&
+    (file.startsWith('blob:') || validateDataURL(file))
+  ) {
     const res = await fetch(file);
     return await res.blob();
   }
